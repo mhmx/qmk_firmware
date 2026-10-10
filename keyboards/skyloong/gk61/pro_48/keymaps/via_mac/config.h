@@ -1,0 +1,1 @@
+#define DYNAMIC_KEYMAP_LAYER_COUNT  5      // 5 layers in VIA according to current keymap.c

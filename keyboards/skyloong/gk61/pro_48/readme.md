@@ -1,6 +1,6 @@
 # GK61 PRO 48
 
-![GK61 PRO](https://i.imgur.com/DTetyVLh.jpg)
+![GK61 PRO](https://fastpic.org/view/128/2026/0909/_72fbae45aa6b98241dd78b3aafb908a9.jpg)
 
 ## The PCB features:
 * QMK & VIA compatibility

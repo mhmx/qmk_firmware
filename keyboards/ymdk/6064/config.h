@@ -1,0 +1,7 @@
+#pragma once
+
+#undef STM32_HSECLK
+#define STM32_HSECLK 16000000
+
+#define TAPPING_TOGGLE 2
+#define DYNAMIC_KEYMAP_MACRO_COUNT 5

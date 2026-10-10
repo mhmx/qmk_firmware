@@ -1,5 +1,5 @@
 {
-    "keyboard_name": "YD60MQ",
+    "keyboard_name": "Tofu60 YD60MQ",
     "manufacturer": "YMDK",
     "maintainer": "qmk",
     "usb": {
@@ -10,9 +10,9 @@
         "backlight": true,
         "bootmagic": true,
         "extrakey": true,
-        "mousekey": true,
+        "mousekey": false,
         "nkro": true,
-        "rgblight": true
+        "rgblight": false
     },
     "qmk": {
         "locking": {
