@@ -53,5 +53,12 @@
             "fileMatch": ["keymap.json"],
             "url": "./data/schemas/keymap.jsonschema"
         }
-    ]
+    ],
+    "cmake.sourceDirectory": "/Users/maxim/qmk_firmware/lib/googletest",
+    "chat.tools.terminal.autoApprove": {
+        "/^python3 -c 'import json; from pathlib import Path; p=Path\\(\"keyboards/ymdk/yd60mq/keyboard\\.json\"\\); d=json\\.loads\\(p\\.read_text\\(\\)\\); a=d\\[\"layouts\"\\]\\[\"LAYOUT_all\"\\]\\[\"layout\"\\]; print\\(\"YD macro positions\",len\\(a\\)\\); from collections import Counter; print\\(Counter\\(tuple\\(x\\[\"matrix\"\\]\\)\\[0\\] for x in a\\)\\); print\\(\\[x\\[\"matrix\"\\] for x in a if x\\[\"matrix\"\\]\\[0\\]==4\\]\\); p=Path\\(\"keyboards/ymdk/dk61/via\\.json\"\\); d=json\\.loads\\(p\\.read_text\\(\\)\\); print\\(\"DK via rows\"\\); print\\(\\[\\[x for x in r if isinstance\\(x,str\\) and \",\" in x\\] for r in d\\[\"layouts\"\\]\\[\"keymap\"\\]\\]\\)'$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
 }
