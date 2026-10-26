@@ -59,6 +59,10 @@
         "/^python3 -c 'import json; from pathlib import Path; p=Path\\(\"keyboards/ymdk/yd60mq/keyboard\\.json\"\\); d=json\\.loads\\(p\\.read_text\\(\\)\\); a=d\\[\"layouts\"\\]\\[\"LAYOUT_all\"\\]\\[\"layout\"\\]; print\\(\"YD macro positions\",len\\(a\\)\\); from collections import Counter; print\\(Counter\\(tuple\\(x\\[\"matrix\"\\]\\)\\[0\\] for x in a\\)\\); print\\(\\[x\\[\"matrix\"\\] for x in a if x\\[\"matrix\"\\]\\[0\\]==4\\]\\); p=Path\\(\"keyboards/ymdk/dk61/via\\.json\"\\); d=json\\.loads\\(p\\.read_text\\(\\)\\); print\\(\"DK via rows\"\\); print\\(\\[\\[x for x in r if isinstance\\(x,str\\) and \",\" in x\\] for r in d\\[\"layouts\"\\]\\[\"keymap\"\\]\\]\\)'$/": {
             "approve": true,
             "matchCommandLine": true
+        },
+        "/^python3 -m json\\.tool keyboards/ymdk/dk61/keyboard\\.json >/dev/null && git diff --check -- keyboards/ymdk/dk61/keymaps/default/keymap\\.c keyboards/ymdk/dk61/keyboard\\.json && git status --short -- keyboards/ymdk/dk61/keymaps/default/keymap\\.c keyboards/ymdk/dk61/keyboard\\.json$/": {
+            "approve": true,
+            "matchCommandLine": true
         }
     }
 }

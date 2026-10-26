@@ -53,7 +53,7 @@
         "toggle": 2
     },
     "dynamic_keymap": {
-        "layer_count": 7
+        "layer_count": 6
     },
     "eeprom": {
         "wear_leveling": {
