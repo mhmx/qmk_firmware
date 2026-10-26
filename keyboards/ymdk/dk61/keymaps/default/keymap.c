@@ -123,7 +123,7 @@ bool led_update_user(led_t led_state) {
 }
 
 void housekeeping_task_user(void) {
-    if (startup_caps_lock_active && timer_elapsed32(startup_caps_lock_timer) >= 2000) {
+    if (startup_caps_lock_active && timer_elapsed32(startup_caps_lock_timer) >= 1000) {
         startup_caps_lock_active = false;
         led_set(host_keyboard_led_state().raw);
     }
