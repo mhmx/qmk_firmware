@@ -1,5 +1,9 @@
 #include QMK_KEYBOARD_H
 
+#include "host.h"
+#include "led.h"
+#include "timer.h"
+
 // слои
 #define L_A         LT(1,  KC_A)
 #define L_F         LT(2,  KC_F)
@@ -16,7 +20,7 @@ enum custom_keycodes { M_CTRL = QK_KB_0 };
 // ──────────────── Раскладка
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-    [0] = LAYOUT_all(
+    [0] = LAYOUT(
         KC_ESC,            KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSLS,  KC_DEL,
         KC_TAB,            KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,            KC_BSPC,
         M_CTRL,            L_A,      KC_S,     KC_D,     L_F,      KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,            _______,  KC_ENT,
@@ -24,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,           KC_LGUI,  KC_LALT,            L_SPC,    KC_APP,   L_BSPC,             KC_RCTL,                      KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_END
     ),
 
-    [1] = LAYOUT_all(
+    [1] = LAYOUT(
         KC_GRV,            KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_GRV,   A(KC_4),
         _______,           _______,  KC_LGUI,  KC_F2,    KC_F4,    _______,  _______,  KC_HOME,  KC_UP,    KC_PGUP,  KC_PSCR,  KC_SCRL,  KC_NUM,             KC_PAUS,
         KC_CAPS,           _______,  KC_LCTL,  KC_LSFT,  KC_LALT,  _______,  KC_ENT,   KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_BSPC,  KC_DEL,             _______,  KC_ENT,
@@ -32,7 +36,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,           KC_LGUI,  KC_LALT,            KC_ESC,   _______,  _______,            _______,                      KC_HOME,  KC_PGDN,  KC_END,   _______
     ),
 
-    [2] = LAYOUT_all(
+    [2] = LAYOUT(
         KC_GRV,            _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  A(KC_4),
         _______,           _______,  G(KC_L),  KC_F2,    KC_F4,    _______,  KC_PSLS,  KC_P7,    KC_P8,    KC_P9,    KC_PMNS,  _______,  _______,            _______,
         KC_CAPS,           _______,  KC_PSLS,  KC_PAST,  _______,  _______,  KC_ENT,   KC_P4,    KC_P5,    KC_P6,    KC_PPLS,  KC_BSPC,            _______,  KC_PENT,
@@ -40,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,           KC_LGUI,  KC_LALT,            KC_LALT,  _______,  KC_P0,              _______,                      _______,  _______,  _______,  _______
     ),
 
-    [3] = LAYOUT_all(
+    [3] = LAYOUT(
         QK_BOOT,           C(KC_1),  C(KC_2),  C(KC_3),  C(KC_4),  C(KC_5),  C(KC_6),  C(KC_7),  C(KC_8),  C(KC_9),  C(KC_0),  BR_DOWN,  BR_UP,    _______,  A(KC_4),
         _______,           A(KC_F4), C(KC_W),  G(KC_E),  C(KC_R),  C(KC_T),  C(KC_Y),  _______,  KC_INS,   _______,  _______,  _______,  _______,            QK_CLEAR_EEPROM,
         KC_CAPS,           C(KC_A),  C(KC_S),  G(KC_D),  C(KC_F),  _______,  KC_ENT,   _______,  _______,  G(KC_L),  _______,  KC_MPLY,            _______,  _______,
@@ -48,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,           KC_LGUI,  KC_LALT,            _______,  _______,  _______,            _______,                      KC_MPRV,  KC_VOLD,  KC_MNXT,  KC_HOME
     ),
 
-    [4] = LAYOUT_all(
+    [4] = LAYOUT(
         KC_GRV,            KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   KC_GRV,   A(KC_4),
         _______,           _______,  _______,  _______,  _______,  _______,  _______, S(KC_MINS),S(KC_EQL),KC_MINS,  KC_EQL,  S(KC_LBRC),S(KC_RBRC),         _______,
         KC_CAPS,           S(KC_1),  S(KC_2),  S(KC_3),  S(KC_4),  S(KC_5),  S(KC_6),  S(KC_7),  S(KC_8),  S(KC_9),  S(KC_0),  KC_MINS,            _______,  _______,
@@ -99,4 +103,32 @@ bool is_flow_tap_key(uint16_t keycode) {
     }
     // Иначе работает для всех остальных клавиш
     return true;
+}
+
+static uint32_t startup_caps_lock_timer;
+static bool startup_caps_lock_active;
+
+void keyboard_post_init_user(void) {
+    startup_caps_lock_timer = timer_read32();
+    startup_caps_lock_active = true;
+
+    led_t led_state = host_keyboard_led_state();
+    led_state.caps_lock = true;
+    led_set(led_state.raw);
+}
+
+bool led_update_user(led_t led_state) {
+    if (startup_caps_lock_active) {
+        led_state.caps_lock = true;
+    }
+
+    led_update_ports(led_state);
+    return false;
+}
+
+void housekeeping_task_user(void) {
+    if (startup_caps_lock_active && timer_elapsed32(startup_caps_lock_timer) >= 1000) {
+        startup_caps_lock_active = false;
+        led_set(host_keyboard_led_state().raw);
+    }
 }
