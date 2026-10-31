@@ -52,11 +52,10 @@
     "tapping": {
         "term": 220,
         "permissive_hold": true,
-        "flow_tap_term": 130,
-        "toggle": 2
+        "flow_tap_term": 130
     },
     "dynamic_keymap": {
-        "layer_count": 8
+        "layer_count": 6
     },
     "eeprom": {
         "wear_leveling": {
